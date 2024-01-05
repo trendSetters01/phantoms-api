@@ -7,7 +7,7 @@ type EmojiResponse = string[];
 
 router.get<{}, EmojiResponse>("/", async (req, res) => {
   const origin = req.get("origin");
-  if (origin !== "http://localhost:3001") {
+  if (origin !== "http://localhost:3000") {
   console.log(origin);
   return res.status(403).json();
   }

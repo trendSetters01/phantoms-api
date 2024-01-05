@@ -44,10 +44,9 @@ export async function send(
         suggestedParams
       );
     }
-    const mnemonic =
-      "essence candy this answer elder cruel rose image health pause essence announce rotate neither toddler sound orient earn arch prosper hard walk oyster about sell"; //process.env.REACT_APP_MNEMONIC;
+    const mnemonic = process.env.REACT_APP_MNEMONIC;
 
-    const rewardProviderAccount = algosdk.mnemonicToSecretKey(mnemonic);
+    const rewardProviderAccount = algosdk.mnemonicToSecretKey(`${mnemonic}`);
 
     const signedTxn = algosdk.signTransaction(txn, rewardProviderAccount.sk);
     const txConfirmation = await algodClient

@@ -1,8 +1,8 @@
 import express from 'express';
 
 import MessageResponse from '../interfaces/MessageResponse';
-import emojis from './emojis';
 import sendRewards from './sendRewards';
+import raffle from './raffle';
 
 const router = express.Router();
 
@@ -12,7 +12,8 @@ router.get<{}, MessageResponse>('/', (req, res) => {
   });
 });
 
-router.use('/emojis', emojis);
 router.use('/send', sendRewards);
+
+router.use('/', raffle);
 
 export default router;
