@@ -16,8 +16,8 @@ router.post<{}, SendRewardsResponse>(
     }
 
     const { to } = req.body;
-    const amount = Math.floor(Math.random() * 350) + 1;
-    const txn = await sendRewards(to, (amount > 200 ? amount : 200) * 100000000, "1279721720");
+    const amount = Math.floor(Math.random() * 500) + 1;
+    const txn = await sendRewards(to, (amount > 400 ? amount : 400) * 100000000, "1279721720");
 
     res.json({ statusCode: res.statusCode, txn: txn });
   }
