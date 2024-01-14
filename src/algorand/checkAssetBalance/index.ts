@@ -1,6 +1,6 @@
 import { algodClient } from "../config.js";
 
-export async function checkAssetBalance(address, assetId) {
+export async function checkAssetBalance(address: string, assetId: number) {
   try {
     const accountAssetInfo = await algodClient
       .accountAssetInformation(address, assetId)

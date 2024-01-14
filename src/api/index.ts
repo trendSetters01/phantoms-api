@@ -12,8 +12,7 @@ router.get<{}, MessageResponse>('/', (req, res) => {
   });
 });
 
-router.use('/send', sendRewards);
-
-router.use('/', raffle);
+router.use('/', sendRewards);
+// router.use('/', raffle);
 
 export default router;

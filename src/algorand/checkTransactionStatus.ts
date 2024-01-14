@@ -1,6 +1,6 @@
-import { algodClient } from "./config.js";
+import { algodClient } from "./config";
 
-export default async function checkTransactionStatus(txId, resolve) {
+export default async function checkTransactionStatus(txId: string, resolve: any) {
   try {
     const response = await algodClient.pendingTransactionInformation(txId).do();
     console.log("Transaction status:", response);
