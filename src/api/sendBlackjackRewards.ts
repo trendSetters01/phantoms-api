@@ -6,7 +6,7 @@ const router = express.Router();
 type SendRewardsResponse = { statusCode: number; txn: any };
 
 router.post<{}, SendRewardsResponse>(
-  "/send-blackjack-rewards",
+  "/send-phantoms-21-rewards",
   async (req: Request, res: Response) => {
     const origin = req.get("origin");
 
