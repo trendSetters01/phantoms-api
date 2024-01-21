@@ -8,6 +8,7 @@ export default async function checkTransactionAmount(
   assetId: any
 ) {
   try {
+    setTimeout(() => {}, 10000);
     const response = await algodClient.pendingTransactionInformation(txId).do();
     if (
       response["confirmed-round"] !== null &&
