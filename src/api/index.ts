@@ -1,8 +1,8 @@
 import express from "express";
 
 import MessageResponse from "../interfaces/MessageResponse";
-import sendRewards from "./sendRewards";
-// import sendBlackjackRewards from "./sendBlackjackRewards";
+import sendCardsRPGRewards from "./sendRewards";
+import sendBlackjackRewards from "./sendBlackjackRewards";
 import checkDepositTx from "./checkDepositTx";
 import raffle from "./raffle";
 
@@ -14,8 +14,8 @@ router.get<{}, MessageResponse>("/", (req, res) => {
   });
 });
 
-router.use("/", sendRewards);
-// router.use("/", sendBlackjackRewards);
+router.use("/", sendCardsRPGRewards);
+router.use("/", sendBlackjackRewards);
 router.use("/", checkDepositTx);
 // router.use('/', raffle);
 
