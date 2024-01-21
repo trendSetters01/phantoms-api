@@ -2,7 +2,7 @@ import express from "express";
 
 import MessageResponse from "../interfaces/MessageResponse";
 import sendRewards from "./sendRewards";
-import sendBlackjackRewards from "./sendBlackjackRewards";
+// import sendBlackjackRewards from "./sendBlackjackRewards";
 import checkDepositTx from "./checkDepositTx";
 import raffle from "./raffle";
 
