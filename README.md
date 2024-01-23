@@ -1,4 +1,4 @@
-# Express API Starter with Typescript
+# Phantoms API with Typescript
 
 How to use this template:
 
