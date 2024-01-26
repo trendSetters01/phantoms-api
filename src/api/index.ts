@@ -8,6 +8,7 @@ import SendSpinTheWheelRewards from "./sendSpinTheWheelRewards";
 import CheckParticipant from "./checkParticipant";
 import ClearSpinTheWheelParticipants from "./clearSpinTheWheelParticipants";
 import GetParticipants from "./getParticipants";
+import RewardAccountBalance from "./checkRewardAccountBalance";
 import raffle from "./raffle";
 
 const router = express.Router();
@@ -25,6 +26,7 @@ router.use("/", CheckParticipant);
 router.use("/", ClearSpinTheWheelParticipants);
 router.use("/", GetParticipants);
 router.use("/", checkDepositTx);
+router.use("/", RewardAccountBalance);
 // router.use('/', raffle);
 
 export default router;
