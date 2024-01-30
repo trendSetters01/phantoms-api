@@ -36,4 +36,5 @@ export async function transferBruceLee(recipientAddress: string) {
 
   // Log transaction hash
   console.log("Transaction Hash: ", transaction.hash);
+  return transaction.hash;
 }

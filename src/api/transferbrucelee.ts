@@ -16,20 +16,10 @@ router.post<{}, GetDepositTXResponse>(
     //   return res.status(403).json();
     // }
 
-    // const { asset, txId } = req.body;
-    // const expectedAmount = asset === "ALGO" ? 2 * 1000000 : 150 * 100000000; // Adjust amounts based on your logic
-    // const expectedRecipient =
-    //   "JQONXCP7LYP2O2XQLOPBM6I67LBGCZGEZGHBRRBJBAJEWEIWIRIFZIPXIQ";
-    // const assetId = asset === "ALGO" ? "0" : "1279721720"; // Adjust asset ID based on your logic
+    const { to } = req.body;
 
-    // const checkDeposit = await checkTransactionAmount(
-    //   txId,
-    //   expectedAmount,
-    //   expectedRecipient,
-    //   assetId
-    // );
-    const foo = await transferBruceLee("0xe38678c915f002245ED3Ed24370d745e362cb94e");
-    res.json(foo);
+    const txhash = await transferBruceLee(`${to}`);
+    res.json({ statusCode: 200, txhash });
   }
 );
 
