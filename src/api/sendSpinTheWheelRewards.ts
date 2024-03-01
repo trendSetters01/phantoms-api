@@ -53,7 +53,8 @@ router.post<{}, SendSpinTheWheelRewardsResponse>(
     }
 
     const { asset, to } = req.body;
-    const assetId = asset === "ALGO" ? "0" : "1279721720";
+    const assetId =
+      asset === "ALGO" ? "0" : asset === "TACOS" ? "329110405" : "1279721720";
     const amount = assetId === "0" ? 2 : 100;
 
     try {
@@ -72,7 +73,9 @@ router.post<{}, SendSpinTheWheelRewardsResponse>(
 
         const txn = await sendRewards(
           to,
-          amount * (assetId === "0" ? 1000000 : 100000000),
+          assetId === "329110405"
+            ? amount
+            : amount * (assetId === "0" ? 1000000 : 100000000),
           assetId
         );
 

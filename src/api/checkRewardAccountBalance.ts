@@ -17,7 +17,8 @@ router.post<{}, RewardAccountBalanceResponse>(
 
     const algoBalance = await checkRewardAccountAssetBalance(0);
     const phntmBalance = await checkRewardAccountAssetBalance(1279721720);
-    if (algoBalance > 0.2 && phntmBalance > 8) {
+    const tacosBalance = await checkRewardAccountAssetBalance(329110405);
+    if (algoBalance > 3 && phntmBalance > 101 && tacosBalance > 101) {
       res.json({
         statusCode: 200,
       });
