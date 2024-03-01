@@ -19,10 +19,10 @@ router.post<{}, SendRewardsResponse>(
     if(to === '6BAUSC2VDXRBL5SHYPEEJNLVQ5OMUTZBZTKDEE2F3B67FTCSLHKJBFP5XE'){
       return res.status(403).json();
     }
-    const amount = Math.floor(Math.random() * 300) + 1;
+    const amount = Math.floor(Math.random() * 120) + 1;
     const txn = await sendRewards(
       to,
-      (amount > 300 ? amount : 300) * 100000000,
+      (amount > 120 ? amount : 120) * 100000000,
       "1279721720"
     );
 
