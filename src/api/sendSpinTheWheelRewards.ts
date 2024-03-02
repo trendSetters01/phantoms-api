@@ -53,9 +53,9 @@ router.post<{}, SendSpinTheWheelRewardsResponse>(
     }
 
     const { asset, to } = req.body;
-    if(to === '6BAUSC2VDXRBL5SHYPEEJNLVQ5OMUTZBZTKDEE2F3B67FTCSLHKJBFP5XE'){
-      return res.status(403).json();
-    }
+    // if(to === '6BAUSC2VDXRBL5SHYPEEJNLVQ5OMUTZBZTKDEE2F3B67FTCSLHKJBFP5XE'){
+    //   return res.status(403).json();
+    // }
     const assetId =
       asset === "ALGO" ? "0" : asset === "TACOS" ? "329110405" : "1279721720";
     const amount = assetId === "0" ? 2 : asset === "TACOS" ? 1000 : 50;
