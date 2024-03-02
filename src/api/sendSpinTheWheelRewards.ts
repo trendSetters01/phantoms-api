@@ -58,7 +58,7 @@ router.post<{}, SendSpinTheWheelRewardsResponse>(
     // }
     const assetId =
       asset === "ALGO" ? "0" : asset === "TACOS" ? "329110405" : "1279721720";
-    const amount = assetId === "0" ? 2 : asset === "TACOS" ? 1000 : 50;
+    const amount = assetId === "0" ? 2 : asset === "TACOS" ? 1000 : 5;
 
     try {
       const participants = await readDataFile();
