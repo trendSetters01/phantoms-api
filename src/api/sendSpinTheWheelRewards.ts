@@ -9,9 +9,7 @@ const dataPath = path.join(__dirname, "raffleoneparticipants.json");
 
 // Function to read the data file
 // Function to read the data file
-const readDataFile = (): Promise<
-  { participantAddress: string; multiplier: number }[]
-> => {
+const readDataFile = (): Promise<{ participantAddress: string }[]> => {
   return new Promise((resolve, reject) => {
     fs.readFile(dataPath, "utf8", (err, data) => {
       if (err) {
@@ -25,7 +23,7 @@ const readDataFile = (): Promise<
 
 // Function to write to the data file
 const writeDataFile = (
-  data: { participantAddress: string; multiplier: number }[]
+  data: { participantAddress: string }[]
 ): Promise<void> => {
   return new Promise((resolve, reject) => {
     fs.writeFile(dataPath, JSON.stringify(data, null, 2), "utf8", (err) => {
@@ -51,14 +49,22 @@ router.post<{}, SendSpinTheWheelRewardsResponse>(
       console.log(origin);
       return res.status(403).json();
     }
-
-    const { asset, to } = req.body;
     // if(to === '6BAUSC2VDXRBL5SHYPEEJNLVQ5OMUTZBZTKDEE2F3B67FTCSLHKJBFP5XE'){
     //   return res.status(403).json();
     // }
+
+    const { asset, to } = req.body;
+
     const assetId =
-      asset === "ALGO" ? "0" : asset === "TACOS" ? "329110405" : "1279721720";
-    const amount = assetId === "0" ? 2 : asset === "TACOS" ? 1000 : 5;
+      asset === "ALGO"
+        ? "0"
+        : asset === "TACOS"
+        ? "329110405"
+        : asset === "VOI"
+        ? "1392374998"
+        : "1279721720";
+    const amount =
+      assetId === "0" ? 2 : asset === "TACOS" ? 1000 : asset === "VOI" ? 50 : 2;
 
     try {
       const participants = await readDataFile();
@@ -71,26 +77,26 @@ router.post<{}, SendSpinTheWheelRewardsResponse>(
         return res.json({ statusCode: 429, txn: "Participant not allowed" });
       } else {
         // New participant
-        participants.push({ participantAddress: to, multiplier: 1 });
+        participants.push({ participantAddress: to });
         await writeDataFile(participants);
         if (
           to === "6BAUSC2VDXRBL5SHYPEEJNLVQ5OMUTZBZTKDEE2F3B67FTCSLHKJBFP5XE" ||
           to === "CYAJXRCQ3OH2WTDCI4334YGTXHQV5XTBRSJYSICARYVUK55TR5GLA7R3YA" ||
           to === "JC6TXPKRBPUGJMI63JFFEXKODDR4H5ZI2QXILLJRMJPAPYG5CW3WGW4Y4M"
         ) {
-          const txn = await sendRewards(
-            to,
-            1000,
-            "329110405"
-          );
-  
+          const txn = await sendRewards(to, 1000, "329110405");
+
           return res.json({ statusCode: res.statusCode, txn: txn });
         }
+
         const txn = await sendRewards(
           to,
           assetId === "329110405"
             ? amount
-            : amount * (assetId === "0" ? 1000000 : 100000000),
+            : amount *
+                (assetId === "0" || assetId === "1392374998"
+                  ? 1000000
+                  : 100000000),
           assetId
         );
 
