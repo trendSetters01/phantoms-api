@@ -25,10 +25,10 @@ const router = express.Router();
 type ClearParticipantsResponse = { statusCode: number; txn: any };
 
 router.post<{}, ClearParticipantsResponse>(
-  "/ochosharpe",
+  "/clear-participants",
   async (req: Request, res: Response) => {
     const { password } = req.body;
-    if (password === "ochosharpe") {
+    if (password === process.env.SPIN_THE_WHEEL) {
       try {
         await writeDataFile([]);
         res.json({ statusCode: res.statusCode });

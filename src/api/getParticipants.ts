@@ -30,7 +30,7 @@ router.post<{}, GetParticipantsResponse>(
   "/get-participants",
   async (req: Request, res: Response) => {
     const { password } = req.body;
-    if (password === "ochosharpe") {
+    if (password === process.env.SPIN_THE_WHEEL) {
       try {
         const participants = await readDataFile();
 
