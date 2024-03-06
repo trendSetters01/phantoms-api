@@ -1,8 +1,8 @@
 import express, { Request, Response } from "express";
 import { sendRewards } from "../algorand/transactionHelpers/sendReward";
-
 import fs from "fs";
 import path from "path";
+import { isValidTransaction } from "../algorand/transactionHelpers/verifyTransaction";
 
 // Path to the JSON file
 const dataPath = path.join(__dirname, "raffleoneparticipants.json");
@@ -49,12 +49,12 @@ router.post<{}, SendSpinTheWheelRewardsResponse>(
       console.log(origin);
       return res.status(403).json();
     }
-    // if(to === '6BAUSC2VDXRBL5SHYPEEJNLVQ5OMUTZBZTKDEE2F3B67FTCSLHKJBFP5XE'){
-    //   return res.status(403).json();
-    // }
 
-    const { asset, to } = req.body;
-
+    const { asset, to, winReceipt } = req.body;
+    const valid = await isValidTransaction(winReceipt);
+    if (!valid) {
+      return res.status(403).json();
+    }
     const assetId =
       asset === "ALGO"
         ? "0"
