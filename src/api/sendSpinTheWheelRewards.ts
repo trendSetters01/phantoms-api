@@ -60,6 +60,8 @@ router.post<{}, SendSpinTheWheelRewardsResponse>(
         ? "0"
         : asset === "TACOS"
         ? "329110405"
+        : asset === "AKITA"
+        ? "523683256"
         : asset === "VOI"
         ? "1392374998"
         : "1279721720";
@@ -68,6 +70,8 @@ router.post<{}, SendSpinTheWheelRewardsResponse>(
         ? 0.125
         : asset === "TACOS"
         ? 1000
+        : asset === "AKITA"
+        ? 4
         : asset === "VOI"
         ? 50
         : 2;
@@ -85,22 +89,15 @@ router.post<{}, SendSpinTheWheelRewardsResponse>(
         // New participant
         participants.push({ participantAddress: to });
         await writeDataFile(participants);
-        if (
-          to === "6BAUSC2VDXRBL5SHYPEEJNLVQ5OMUTZBZTKDEE2F3B67FTCSLHKJBFP5XE" ||
-          to === "CYAJXRCQ3OH2WTDCI4334YGTXHQV5XTBRSJYSICARYVUK55TR5GLA7R3YA" ||
-          to === "JC6TXPKRBPUGJMI63JFFEXKODDR4H5ZI2QXILLJRMJPAPYG5CW3WGW4Y4M"
-        ) {
-          const txn = await sendRewards(to, 1000, "329110405");
-
-          return res.json({ statusCode: res.statusCode, txn: txn });
-        }
 
         const txn = await sendRewards(
           to,
           assetId === "329110405"
             ? amount
             : amount *
-                (assetId === "0" || assetId === "1392374998"
+                (assetId === "0" ||
+                assetId === "1392374998" ||
+                assetId === "523683256"
                   ? 1000000
                   : 100000000),
           assetId
