@@ -58,6 +58,8 @@ router.post<{}, SendSpinTheWheelRewardsResponse>(
     const assetId =
       asset === "ALGO"
         ? "0"
+        : asset === "A200"
+        ? "1682662165"
         : asset === "TACOS"
         ? "329110405"
         : asset === "AKITA"
@@ -68,6 +70,8 @@ router.post<{}, SendSpinTheWheelRewardsResponse>(
     const amount =
       assetId === "0"
         ? 0.125
+        : asset === "A200"
+        ? 0.525
         : asset === "TACOS"
         ? 1000
         : asset === "AKITA"
@@ -94,12 +98,14 @@ router.post<{}, SendSpinTheWheelRewardsResponse>(
           to,
           assetId === "329110405"
             ? amount
+            : assetId === "1682662165"
+            ? amount * 1000
             : amount *
-                (assetId === "0" ||
-                assetId === "1392374998" ||
-                assetId === "523683256"
-                  ? 1000000
-                  : 100000000),
+              (assetId === "0" ||
+              assetId === "1392374998" ||
+              assetId === "523683256"
+                ? 1000000
+                : 100000000),
           assetId
         );
 

@@ -21,7 +21,8 @@ export async function sendRewards(to: any, amount: any, assetId: any) {
         to,
         amount,
         undefined, // closeRemainderTo
-        algosdk.encodeObj({ note: "thanks for participating" }),
+        // @ts-ignore
+        algosdk.encodeObj("Phantom Pals: Thank you for participating in our activities 👻"),
         suggestedParams
       );
     } else {
@@ -32,7 +33,8 @@ export async function sendRewards(to: any, amount: any, assetId: any) {
         undefined, // closeRemainderTo
         undefined, // revocationTarget
         amount,
-        algosdk.encodeObj({ note: "thanks for participating" }),
+        // @ts-ignore
+        algosdk.encodeObj("Phantom Pals: Thank you for participating in our activities 👻"),
         parseInt(assetId, 10), // Asset ID for ASA
         suggestedParams
       );
