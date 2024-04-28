@@ -11,7 +11,9 @@ import GetParticipants from "./getParticipants";
 import RewardAccountBalance from "./checkRewardAccountBalance";
 import Transferbrucelee from "./transferbrucelee";
 import GetCardsRPG from "./getCardsRPG";
-import raffle from "./raffle";
+import GetNFTRaffleParticipant from "./raffle/getNFTRaffleParticipant";
+import ClearNFTRaffleParticipant from "./raffle/clearRaffleParticipants";
+import checkRaffleDepositTx from "./raffle/checkRaffleDepositTx";
 
 const router = express.Router();
 
@@ -31,6 +33,8 @@ router.use("/", checkDepositTx);
 router.use("/", RewardAccountBalance);
 router.use("/", Transferbrucelee);
 router.use("/", GetCardsRPG);
-// router.use('/', raffle);
+router.use("/", checkRaffleDepositTx);
+router.use("/", GetNFTRaffleParticipant);
+router.use("/", ClearNFTRaffleParticipant);
 
 export default router;

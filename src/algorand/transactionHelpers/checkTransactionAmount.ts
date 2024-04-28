@@ -7,7 +7,7 @@ export default async function checkTransactionAmount(
   expectedRecipient: any,
   assetId: any
 ) {
-  const maxAttempts = 5; // Maximum number of retry attempts
+  const maxAttempts = 15; // Maximum number of retry attempts
   let attempts = 0;
 
   while (attempts < maxAttempts) {
