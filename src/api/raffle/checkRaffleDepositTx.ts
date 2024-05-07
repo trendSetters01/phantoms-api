@@ -50,10 +50,10 @@ router.post<{}, GetRaffleDepositTXResponse>(
       return res.status(403).json();
     }
 
-    let tokenPrice = 1;
+    let rafflePrice = 150;
 
     const { txId, accountAddress, entryId } = req.body;
-    const expectedAmount = tokenPrice * 100000000; // Adjust amounts based on your logic
+    const expectedAmount = rafflePrice * 100000000; // Adjust amounts based on your logic
     const expectedRecipient =
       "JQONXCP7LYP2O2XQLOPBM6I67LBGCZGEZGHBRRBJBAJEWEIWIRIFZIPXIQ";
     const assetId = "1279721720"; // Adjust asset ID based on your logic
