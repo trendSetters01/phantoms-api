@@ -45,7 +45,7 @@ router.post<{}, SendSpinTheWheelRewardsResponse>(
   async (req: Request, res: Response) => {
     const origin = req.get("origin");
 
-    if (origin !== "https://phantoms-ashy.vercel.app") {
+    if (origin !== "https://phantom-pals.vercel.app") {
       console.log(origin);
       return res.status(403).json();
     }
