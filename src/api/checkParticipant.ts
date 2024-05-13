@@ -1,13 +1,12 @@
 import express, { Request, Response } from "express";
-import { sendRewards } from "../algorand/transactionHelpers/sendReward";
 
 import fs from "fs";
 import path from "path";
+import { checkAddressContainsPhantomV1NFT } from "../algorand/transactionHelpers/checkForV1NFT";
+import { checkPHNTMHolding } from "../algorand/transactionHelpers/checkPHNTMHolding";
 
-// Path to the JSON file
 const dataPath = path.join(__dirname, "raffleoneparticipants.json");
 
-// Function to read the data file
 const readDataFile = (): Promise<
   { participantAddress: string; multiplier: number }[]
 > => {
@@ -39,17 +38,21 @@ router.post<{}, CheckParticipantResponse>(
     const { to } = req.body;
 
     try {
-      const participants = await readDataFile();
-      const participantIndex = participants.findIndex(
-        (p) => p.participantAddress === to
-      );
+      const holdsPhantomPalsV1NFT = await checkAddressContainsPhantomV1NFT(to);
+      const validPHNTMHolding = await checkPHNTMHolding(to);
+      if (validPHNTMHolding || holdsPhantomPalsV1NFT) {
+        const participants = await readDataFile();
+        const participantIndex = participants.findIndex(
+          (p) => p.participantAddress === to
+        );
 
-      if (participantIndex >= 0) {
-        // nothing
-        return res.json({ statusCode: 429, txn: "Participant not allowed" });
+        if (participantIndex >= 0) {
+          return res.json({ statusCode: 429, txn: "Participant not allowed" });
+        } else {
+          return res.json({ statusCode: 200, txn: "Participant allowed" });
+        }
       } else {
-        // New participant
-        return res.json({ statusCode: 200, txn: "Participant allowed" });
+        return res.json({ statusCode: 417, txn: "NFT / PHNTM Tokens Needed" });
       }
     } catch (err) {
       res.status(500).json({ message: "Error checking participant" });
