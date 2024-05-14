@@ -71,14 +71,14 @@ router.post<{}, SendSpinTheWheelRewardsResponse>(
       assetId === "0"
         ? 0.125
         : asset === "A200"
-        ? 0.525
+        ? 1
         : asset === "TACOS"
-        ? 1000
+        ? 8500
         : asset === "AKITA"
-        ? 4
+        ? 15
         : asset === "VOI"
         ? 50
-        : 2;
+        : 10;
 
     try {
       const participants = await readDataFile();
