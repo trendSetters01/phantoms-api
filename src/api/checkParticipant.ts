@@ -39,8 +39,8 @@ router.post<{}, CheckParticipantResponse>(
 
     try {
       const holdsPhantomPalsV1NFT = await checkAddressContainsPhantomV1NFT(to);
-      const validPHNTMHolding = await checkPHNTMHolding(to);
-      if (validPHNTMHolding || holdsPhantomPalsV1NFT) {
+      // const validPHNTMHolding = await checkPHNTMHolding(to);
+      if (holdsPhantomPalsV1NFT) {
         const participants = await readDataFile();
         const participantIndex = participants.findIndex(
           (p) => p.participantAddress === to
@@ -52,7 +52,7 @@ router.post<{}, CheckParticipantResponse>(
           return res.json({ statusCode: 200, txn: "Participant allowed" });
         }
       } else {
-        return res.json({ statusCode: 417, txn: "NFT / PHNTM Tokens Needed" });
+        return res.json({ statusCode: 417, txn: "NFT Needed" });
       }
     } catch (err) {
       res.status(500).json({ message: "Error checking participant" });
